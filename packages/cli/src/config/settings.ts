@@ -504,9 +504,13 @@ function findEnvFile(startDir: string): string | null {
     const parentDir = path.dirname(currentDir);
     if (parentDir === currentDir || !parentDir) {
       // check .env under home as fallback, again preferring gemini-specific .env
-      const homeGeminiEnvPath = path.join(homedir(), GEMINI_DIR, '.env');
-      if (fs.existsSync(homeGeminiEnvPath)) {
-        return homeGeminiEnvPath;
+      const userGeminiEnvPath = path.join(
+        Storage.getConfigDir(),
+        GEMINI_DIR,
+        '.env',
+      );
+      if (fs.existsSync(userGeminiEnvPath)) {
+        return userGeminiEnvPath;
       }
       const homeEnvPath = path.join(homedir(), '.env');
       if (fs.existsSync(homeEnvPath)) {

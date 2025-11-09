@@ -6,18 +6,18 @@
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { homedir } from 'node:os';
 
 import type { MCPServerConfig } from '@google/gemini-cli-core';
 import {
   debugLogger,
   GEMINI_DIR,
   getErrorMessage,
+  Storage,
   type TelemetrySettings,
 } from '@google/gemini-cli-core';
 import stripJsonComments from 'strip-json-comments';
 
-export const USER_SETTINGS_DIR = path.join(homedir(), GEMINI_DIR);
+export const USER_SETTINGS_DIR = path.join(Storage.getConfigDir());
 export const USER_SETTINGS_PATH = path.join(USER_SETTINGS_DIR, 'settings.json');
 
 // Reconcile with https://github.com/google-gemini/gemini-cli/blob/b09bc6656080d4d12e1d06734aae2ec33af5c1ed/packages/cli/src/config/settings.ts#L53
